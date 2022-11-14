@@ -2,18 +2,19 @@
 """For a given employee ID, returns information about
 their TODO list progress"""
 
-import requests
-import sys
 
 if __name__ == "__main__":
+    import requests
+    import sys
 
     userId = sys.argv[1]
     user = requests.get("https://jsonplaceholder.typicode.com/users/{}"
                         .format(userId))
 
-    name = user.json().get('username')
+    name = user.json().get('name')
 
-    todos = requests.get('https://jsonplaceholder.typicode.com/todos')
+    todos = requests.get(
+        'https://jsonplaceholder.typicode.com/todos', params={"userId": userId})
     totalTasks = 0
     completed = 0
 
